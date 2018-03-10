@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"xdebug":
+		{
+			"url": "http://localhost/T-sales/",
+			"super_globals": true,
+            "close_on_stop": true
+		}
+	}
+}

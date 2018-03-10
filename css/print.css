@@ -1,0 +1,103 @@
+#receipt_wrapper_print{
+    margin-left: 150px;
+    width: 80%;
+}
+.print_header1 {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 13pt;
+    font-weight: 700;
+    text-align: center;
+}
+.print_header_table {
+	border: 1PX solid windowtext;
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 13pt;
+    font-weight: 700;
+    text-align: center;
+}
+.xl71 {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 10pt;
+}
+.print_header2 {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 15pt;
+    font-weight: 700;
+    text-align: center;
+    white-space: normal;
+}
+.print_header3 {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 12pt;
+    font-weight: 700;
+    text-align: center;
+    white-space: normal;
+}
+.print_italic {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 12pt;
+    font-style: italic;
+    text-align: center;
+}
+.print_normal {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+	font-size: 12pt;
+    font-style: normal;
+    font-weight: 400;
+	
+}
+.print_normal_table {
+	border: 1PX solid windowtext;
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 13pt;
+	text-align: center;
+}
+.print_table{
+	 border-left: 1PX solid windowtext;
+}
+.xl129 {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 14pt;
+    font-style: italic;
+}
+.xl213 {
+    border-color: windowtext -moz-use-text-color -moz-use-text-color;
+    border-style: solid none none;
+    border-width: 1.5pt medium medium;
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 13pt;
+    font-weight: 700;
+    text-align: center;
+}
+.xl215 {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-style: italic;
+    text-align: center;
+}
+.xl210 {
+    color: windowtext;
+    font-family: "Times New Roman",serif;
+    font-size: 13pt;
+    font-style: italic;
+    font-weight: 700;
+    text-align: center;
+}
+
+table, th, td {
+   border: 1px solid black;
+}
+
+.footer_detail_print {
+    margin-left: 50px ! important;
+}

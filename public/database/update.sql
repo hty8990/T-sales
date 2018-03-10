@@ -1,0 +1,1 @@
+update t_sales set type = 1 where payment_type = "Trả thưởng"

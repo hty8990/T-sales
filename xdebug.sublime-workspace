@@ -1,0 +1,553 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sale",
+				"sale_id"
+			],
+			[
+				"size",
+				"sizeof"
+			],
+			[
+				"pir",
+				"print_r"
+			],
+			[
+				"pri",
+				"print_r"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "application/controllers/Config.php",
+			"settings":
+			{
+				"buffer_size": 7230,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/models/Appconfig.php",
+			"settings":
+			{
+				"buffer_size": 4637,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Items.php",
+			"settings":
+			{
+				"buffer_size": 13741,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/models/Item.php",
+			"settings":
+			{
+				"buffer_size": 17362,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 409.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 540.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/opt/lampp/htdocs/T-sales",
+		"/opt/lampp/htdocs/T-sales/application",
+		"/opt/lampp/htdocs/T-sales/application/views/configs",
+		"/opt/lampp/htdocs/T-sales/application/views/items"
+	],
+	"file_history":
+	[
+		"/opt/lampp/htdocs/T-sales/xdebug.sublime-project",
+		"/opt/lampp/htdocs/T-sales/application/views/configs/form.php",
+		"/opt/lampp/htdocs/T-sales/application/models/Appconfig.php",
+		"/opt/lampp/htdocs/T-sales/application/models/Sale.php",
+		"/opt/lampp/htdocs/T-sales/application/helpers/table_helper.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Suppliers.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Sales.php",
+		"/opt/lampp/htdocs/T-sales/application/views/items/from_price_item_customer.php",
+		"/opt/lampp/htdocs/T-sales/application/views/configs/sochi.php",
+		"/opt/lampp/htdocs/T-sales/application/views/configs/manage.php",
+		"/opt/lampp/htdocs/T-sales/application/views/sales/manage.php",
+		"/opt/lampp/htdocs/T-sales/application/views/sales/register.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Items.php",
+		"/opt/lampp/htdocs/T-sales/application/libraries/Item_lib.php",
+		"/opt/lampp/htdocs/T-sales/application/views/partial/header.php",
+		"/opt/lampp/htdocs/T-sales/application/views/partial/header_js.php",
+		"/opt/lampp/htdocs/T-sales/application/libraries/Sale_lib.php",
+		"/opt/lampp/htdocs/T-sales/application/views/sales/taiche.php",
+		"/opt/lampp/htdocs/T-sales/index.php",
+		"/opt/lampp/htdocs/T-sales/system/core/CodeIgniter.php",
+		"/opt/lampp/htdocs/T-sales/application/views/sales/return.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Receivings.php",
+		"/opt/lampp/htdocs/T-sales/system/core/Loader.php",
+		"/home/toanph/.config/sublime-text-3/Packages/Xdebug Client/Xdebug.sublime-settings",
+		"/home/toanph/.config/sublime-text-3/Packages/User/Xdebug.sublime-settings",
+		"/opt/lampp/htdocs/T-sales/application/controllers/index.html",
+		"/opt/lampp/htdocs/T-sales/application/config/database.php",
+		"/opt/lampp/htdocs/T-sales/public/debug",
+		"/opt/lampp/etc/php.ini",
+		"/opt/lampp/bin/php-config",
+		"/etc/php/5.6/mods-available/xdebug.ini",
+		"/opt/lampp/htdocs/T-sales/application/views/sales/receipt_return.php",
+		"/opt/lampp/htdocs/T-sales/application/views/sales/receipt.php",
+		"/opt/lampp/htdocs/T-sales/application/models/Item_quantity.php",
+		"/opt/lampp/htdocs/T-sales/application/views/sales/receipt_default.php",
+		"/opt/lampp/htdocs/T-sales/application/views/receivings/receipt.php",
+		"/opt/lampp/htdocs/T-sales/application/views/receivings/receiving.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Promotion.php",
+		"/opt/lampp/htdocs/T-sales/application/models/Customer.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Promotion_detail.php",
+		"/opt/lampp/htdocs/T-sales/application/views/promotion/suspended.php",
+		"/opt/lampp/htdocs/T-sales/application/views/promotion/from_promotion_detail.php",
+		"/opt/lampp/htdocs/T-sales/public/database/update_db",
+		"/opt/lampp/htdocs/T-sales/public/database/db_tsales.sql",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Item_kits.php",
+		"/opt/lampp/htdocs/T-sales/application/models/Item_kit.php",
+		"/opt/lampp/htdocs/T-sales/application/models/Receiving.php",
+		"/opt/lampp/htdocs/T-sales/application/views/items/form.php",
+		"/opt/lampp/htdocs/T-sales/application/views/items/manage.php",
+		"/opt/lampp/htdocs/T-sales/application/views/item_kits/form.php",
+		"/opt/lampp/htdocs/T-sales/application/views/item_kits/manage.php",
+		"/opt/lampp/htdocs/T-sales/dist/opensourcepos.js",
+		"/opt/lampp/htdocs/T-sales/js/main.js",
+		"/opt/lampp/htdocs/T-sales/application/language/vn/items_lang.php",
+		"/opt/lampp/htdocs/T-sales/application/models/Item.php",
+		"/opt/lampp/htdocs/T-sales/system/helpers/url_helper.php",
+		"/opt/lampp/htdocs/T-sales/system/core/Config.php",
+		"/opt/lampp/htdocs/T-sales/application/libraries/Receiving_lib.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/items_price_customer.php",
+		"/opt/lampp/htdocs/T-sales/application/config/routes.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/items_price.php",
+		"/opt/lampp/htdocs/T-sales/application/views/items/manageprice.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Items_price_customer.php",
+		"/opt/lampp/htdocs/T-sales/application/helpers/namemoney_helper.php",
+		"/opt/lampp/htdocs/T-sales/application/controllers/Items_price.php",
+		"/opt/lampp/htdocs/T-sales/.htaccess",
+		"/opt/lampp/htdocs/T-sales/..htaccess.swp"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 111.0,
+		"where_history":
+		[
+			"/opt/lampp/htdocs/T-sales"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"date_sale",
+			"save(",
+			"date_sale",
+			"start_date",
+			"selectcustormer",
+			"customer",
+			"view(",
+			"mode",
+			"mode_form",
+			"submit",
+			"ayment_options",
+			"select_supplier",
+			"supplier_id",
+			"payment_options",
+			"supplier",
+			"clear_fields",
+			"reload(",
+			"extension",
+			"xdebug",
+			"xdebug.so",
+			"extension",
+			"get_info_return",
+			"//$",
+			"cart_contents",
+			"event.which == 13",
+			"quantity",
+			"enter",
+			"delete(",
+			"search(",
+			"_load_sale_data",
+			"_load_sale_return_data",
+			"receipt(",
+			"search",
+			"total",
+			"clear_fields",
+			"clear_fields\n",
+			"customer",
+			"autocomplete",
+			"#customer",
+			"clear_fields",
+			"('')",
+			"val('')",
+			"get_promotion_by_midle_date_customer",
+			"customer_debt",
+			"reload(",
+			"quantitytang",
+			"reload(",
+			"cuocvanchuyen",
+			"totalkgkhuyenmai",
+			"totalkg",
+			"totalkgkhuyenmai",
+			"tongkg",
+			"totalkg",
+			"remove_sale_id",
+			"get_sale_id",
+			"_load_customer_data",
+			"get_sale_id",
+			"sale_id",
+			"set_customer_debt",
+			"get_customer_debt",
+			"debug",
+			"_load_customer_data",
+			"checksuball",
+			";\n",
+			"date(",
+			"date_sale",
+			"t_sales",
+			"t_receivings_items",
+			"save(",
+			"check_bao_bi",
+			"save(",
+			"submit_handler",
+			"get_row",
+			"submit",
+			"get_info",
+			"common_submit",
+			"search(",
+			"get_row",
+			"cur_item_info",
+			"complete(",
+			"getstringmonney",
+			"doc(",
+			"());\n",
+			"a",
+			"view("
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "application/controllers/Config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7230,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4368,
+								4368
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2925.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "application/models/Appconfig.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4637,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								298,
+								298
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/controllers/Items.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13741,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9525,
+								9525
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7575.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/models/Item.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17362,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6141,
+								6141
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6325.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 33.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 160.0
+	},
+	"output.xdebug":
+	{
+		"height": 160.0
+	},
+	"pinned_build_system": "",
+	"project": "xdebug.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": false,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false,
+			"restore_index":
+			{
+				"21":
+				{
+					"group": 0,
+					"index": 0
+				},
+				"60":
+				{
+					"group": 0,
+					"index": 2
+				},
+				"61":
+				{
+					"group": 0,
+					"index": 3
+				},
+				"62":
+				{
+					"group": 0,
+					"index": 1
+				}
+			},
+			"restore_layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			}
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 348.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
