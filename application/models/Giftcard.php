@@ -251,7 +251,6 @@ class Giftcard extends CI_Model
 		}
 		$this->db->where('DATE(sale_time) BETWEEN ' .$this->db->escape($start_date). ' AND ' . $this->db->escape($end_date));
 		$results = $this->db->get()->result_array();
-		//print_r($results); exit;
 		$i=0;
 		$tong_kgdamdac=$tong_kghonhop=0;
 		$tong_doanhsodamdac=$tong_doanhsohonhop=0;
@@ -261,138 +260,69 @@ class Giftcard extends CI_Model
 		$tong=0;
 		if(sizeof($results) > 0){
 			foreach($results as $result){
-				$sokg = 0;
-				$tong_kg=0;
-				$tongkgvanchuyen = 0;
-				$tienkhuyenmaidamdac = $tienkhuyenmaihonhop =0;
-				$temp_tienvanchuyendamdac = $temp_tienvanchuyenhonhop= 0;
-				$temp_kgdamdac=$temp_kghonhop=0;
-				$temp_doanhsodamdac=$temp_doanhsohonhop=0;
-				$arrkhuyenmais = array();
-				$arrTotal['kl']['thuc_an_dam_dac'] = 0;
-				$arrTotal['kl']['thuc_an_hon_hop'] = 0;
-				$arrTotal['money']['thuc_an_dam_dac'] = 0;
-				$arrTotal['money']['thuc_an_hon_hop'] = 0;
-				$arrTotal['kl']['thuc_an_dam_dac'] = 0;
-				$arrTotal['kl']['thuc_an_hon_hop'] = 0;
-				$arrTotal['money']['thuc_an_dam_dac'] = 0;
-				$arrTotal['money']['thuc_an_hon_hop'] = 0;
-				$this->db->select('item_id,category,quantity,quantity_give,unit_weigh,sale_price,input_prices,quantity_loan,quantity_loan_return');
-				$this->db->from('sales_items');
-				$this->db->where('sale_id', $result['sale_id']);
-				$chitiets = $this->db->get()->result_array();
-				foreach($chitiets as $chitiet){
-					$giagoc = (int)$chitiet['input_prices'];
-					$giaban = (int)$chitiet['sale_price'];
-					$sokg = $chitiet['quantity']*$chitiet['unit_weigh'];
-					$type = $chitiet['category'];
-					$tong_kg = $tong_kg + (($chitiet['quantity'] + $chitiet['quantity_give'] - $chitiet['quantity_loan'] + $chitiet['quantity_loan_return'])*$chitiet['unit_weigh']);
-					// San pham dam dac
-					if($type == 'thuc_an_dam_dac'){
-						$temp_kgdamdac = $temp_kgdamdac + $sokg;
-						$temp_doanhsodamdac = $temp_doanhsodamdac + ($sokg * $giaban);
-						$arrTotal['kl']['thuc_an_dam_dac'] = $arrTotal['kl']['thuc_an_dam_dac'] + $sokg;
-						$arrTotal['money']['thuc_an_dam_dac'] = $arrTotal['money']['thuc_an_dam_dac'] + $sokg*$giaban;
-					}else if($type == 'thuc_an_hon_hop'){
-						$temp_kghonhop = $temp_kghonhop + $sokg;
-						$temp_doanhsohonhop = $temp_doanhsohonhop + ($sokg * $giaban);
-						$arrTotal['kl']['thuc_an_hon_hop'] = $arrTotal['kl']['thuc_an_hon_hop'] + $sokg;
-						$arrTotal['money']['thuc_an_hon_hop'] = $arrTotal['money']['thuc_an_hon_hop'] + $sokg*$giaban;
-					}
-				}
-				$tong_kgdamdac = $tong_kgdamdac + $temp_kgdamdac;
-				$arrkhuyenmais = get_promotion_helper($result['promotion'],$arrTotal,$chitiets,$temp_kgdamdac,$temp_doanhsodamdac);
-				foreach($arrkhuyenmais as $arrkhuyenmai){
-					if($arrkhuyenmai['type'] == 'thuc_an_dam_dac'){
-						$tienkhuyenmaidamdac = $tienkhuyenmaidamdac + $arrkhuyenmai['money'];
-					}			
-				}
-				$tong_doanhsodamdac = $tong_doanhsodamdac + $temp_doanhsodamdac - $tienkhuyenmaidamdac;
-				$tong_kghonhop = $tong_kghonhop + $temp_kghonhop;
-				$arrkhuyenmais = get_promotion_helper($result['promotion'],$arrTotal,$chitiets,$temp_kghonhop,$temp_doanhsohonhop);
-				foreach($arrkhuyenmais as $arrkhuyenmai){
-					if($arrkhuyenmai['type'] == 'thuc_an_hon_hop'){
-						$tienkhuyenmaihonhop = $tienkhuyenmaihonhop + $arrkhuyenmai['money'];
-					}			
-				}
-				$tong_doanhsohonhop = $tong_doanhsohonhop  + $temp_doanhsohonhop - $tienkhuyenmaihonhop;
-				// thuong san luong
 				$tong_kgthuongsanluong = $tong_kgthuongsanluong + $result['sanluong_soluong'];
-				$tong_tienvanchuyen = $tong_tienvanchuyen + ($tong_kg*$result['car_money']);
-				$tong_sotienthuongsanluong = $tong_sotienthuongsanluong + ($result['sanluong_soluong']*$result['sanluong_dongia']);	
-				// tinh khuyen mai ap dung cho tat ca
-				$arrPromotions = json_decode($result['promotion']);
-				$all_tienkhuyenmaidamdac = $all_tienkhuyenmaihonhop =0;
-				foreach($arrPromotions as $arrPromotion){
-					if($arrPromotion->type == 'all'){
-						// kiem tra la khuyen mai Kg hay khuyen mai %
-						if($arrPromotion->promotion_kg > 0){
-							$all_tienkhuyenmaidamdac = $all_tienkhuyenmaidamdac + ($tong_kgdamdac * $arrPromotion->promotion_kg);
-							$all_tienkhuyenmaihonhop = $all_tienkhuyenmaihonhop + ($tong_kghonhop * $arrPromotion->promotion_kg);
+				$tong_sotienthuongsanluong = $tong_sotienthuongsanluong + ($result['sanluong_soluong']*$result['sanluong_dongia']);
+			}
+		}
+		$arrReturn[0]['kg_thuong_san_luong'] = $tong_kgthuongsanluong;
+		$arrReturn[0]['tien_thuong_san_luong'] = $tong_sotienthuongsanluong;
+		return $arrReturn;	
+	}
+
+	public function BC03_tinhtong($data_rows,$customer_id, $people_manager, $category, $start_date, $end_date){
+		$check = '';
+		$datas = array();
+		$code = '';
+		$i = 0;
+		if(!$people_manager >0){
+			$people_manager = -1;
+		}
+		foreach ($data_rows as $data_row) {
+			if ($data_row && isset($data_row['code'])) {
+				if ($code !== $data_row['code']) {
+					$datas[$i]['person_id'] = $data_row['person_id'];
+					$datas[$i]['tong_kg'] = $data_row['tongkg_ban'];
+					$datas[$i]['thuong_san_luong'] = $data_row['thuong_san_luong'];
+					$datas[$i]['doanhso'] = $data_row['tien_lai'];
+					$datas[$i]['tien_van_chuyen'] = $data_row['tienvanchuyen'];
+					$datas[$i]['code'] = $data_row['code'];
+					$code = $data_row['code'];
+					$i++;
+				}
+				else {
+					$j = 0;
+					foreach ($datas as $data) {
+						if (isset($data['code']) && ($data['code'] == $data_row['code'])) {
+							$datas[$j]['tong_kg'] += $data_row['tongkg_ban'];
+							$datas[$j]['thuong_san_luong'] += $data_row['thuong_san_luong'];
+							$datas[$j]['doanhso'] += $data_row['tien_lai'];
+							$datas[$j]['tien_van_chuyen'] += $data_row['tienvanchuyen'];
 						}
-							
+						$j++;
 					}
 				}
-				//echo $tong_kgdamdac+$tong_kghonhop; exit;
-				$tong_doanhsohonhop = $tong_doanhsohonhop - $all_tienkhuyenmaihonhop;
-				$tong_doanhsodamdac = $tong_doanhsodamdac - $all_tienkhuyenmaidamdac;	
 			}
-			// hang tra lai hon hop
-			$this->db->select('items.category,SUM(quantity_return*t_sales_items.unit_weigh) as soluong_tralai, SUM(sale_price*quantity_return*t_sales_items.unit_weigh) as thanhtien');
-			$this->db->from('sales');
-			$this->db->join('sales_items', 'sales_items.sale_id = sales.sale_id');
-			$this->db->join('items', 'items.id = sales_items.item_id');
-			$this->db->join('t_people', 't_people.person_id = sales.customer_id');
-			$this->db->where('sales.type', 2);
-			$this->db->where('items.category', 'thuc_an_hon_hop');
-			if(!empty($customer_id) && $customer_id > 0)
-			{
-				$this->db->where('sales.customer_id', $customer_id);
-			}
-			if(!empty($people_manager) && $people_manager > 0)
-			{
-				$this->db->where('t_people.employees_id', $people_manager);
-			}
-			$this->db->where('DATE(sale_time) BETWEEN ' .$this->db->escape($start_date). ' AND ' . $this->db->escape($end_date));
-			$Honhoptralai = $this->db->get()->result_array();
-			if($Honhoptralai[0]['soluong_tralai'] > 0){
-				$tong_kghonhop = $tong_kghonhop - $Honhoptralai[0]['soluong_tralai'];
-				$tong_doanhsohonhop = $tong_doanhsohonhop - $Honhoptralai[0]['thanhtien'];
-			}
-			// hang tra lai dam dac
-			$this->db->select('SUM(quantity_return*t_sales_items.unit_weigh) as soluong_tralai, SUM(sale_price*quantity_return*t_sales_items.unit_weigh) as thanhtien');
-			$this->db->from('sales');
-			$this->db->join('sales_items', 'sales_items.sale_id = sales.sale_id');
-			$this->db->join('items', 'items.id = sales_items.item_id');
-			$this->db->join('t_people', 't_people.person_id = sales.customer_id');
-			$this->db->where('sales.type', 2);
-			$this->db->where('items.category', 'thuc_an_dam_dac');
-			if(!empty($customer_id) && $customer_id > 0)
-			{
-				$this->db->where('sales.customer_id', $customer_id);
-			}
-			if(!empty($people_manager) && $people_manager > 0)
-			{
-				$this->db->where('t_people.employees_id', $people_manager);
-			}
-			$this->db->where('DATE(sale_time) BETWEEN ' .$this->db->escape($start_date). ' AND ' . $this->db->escape($end_date));
-			$Damdactralai = $this->db->get()->result_array();
-			//echo $tong_kgdamdac; exit;
-			if($Damdactralai[0]['soluong_tralai'] > 0){
-				$tong_kgdamdac = $tong_kgdamdac - $Damdactralai[0]['soluong_tralai'];
-				$tong_doanhsodamdac = $tong_doanhsodamdac - $Damdactralai[0]['thanhtien'];
-			}
-			$tongtatca = $tong_doanhsohonhop + $tong_doanhsodamdac - $tong_sotienthuongsanluong + $tong_tienvanchuyen;
 		}
-		$arrReturn[0]['so_kg_dam_dac'] = $tong_kgdamdac." kg";
-		$arrReturn[0]['doanh_so_dam_dac'] = to_currency($tong_doanhsodamdac);
-		$arrReturn[0]['so_kg_hon_hop'] = $tong_kghonhop." kg";
-		$arrReturn[0]['doanh_so_hon_hop'] = to_currency($tong_doanhsohonhop);
-		$arrReturn[0]['kg_thuong_san_luong'] = $tong_kgthuongsanluong." kg";
-		$arrReturn[0]['tien_thuong_san_luong'] = to_currency($tong_sotienthuongsanluong);
-		$arrReturn[0]['tien_van_chuyen'] = to_currency($tong_tienvanchuyen);
-		$arrReturn[0]['tong'] = to_currency($tongtatca);
-		return $arrReturn;	
+		$j = 0;
+		$tongkg  = $tongthuongsanluong = $doanhso = $tienvanchuyen = 0;
+		foreach ($datas as $data) {
+			// tru hang tra lai
+			$arrReturn = $this->Giftcard->get_hangtralai_by_khachhang($data['person_id'], $people_manager,$start_date, $end_date,$category);
+			if($arrReturn){
+				$datas[$j]['tong_kg'] = $datas[$j]['tong_kg'] - $arrReturn[0]['soluong_tralai'];
+				$datas[$j]['doanhso'] = $datas[$j]['doanhso'] - $arrReturn[0]['thanhtien'];
+			}
+			$tongkg += $datas[$j]['tong_kg'];
+			$tongthuongsanluong += $datas[$j]['thuong_san_luong'];
+			$tienvanchuyen += $datas[$j]['tien_van_chuyen'];
+			$doanhso += $datas[$j]['doanhso'];
+			$j++;
+		}
+		$result['tong_kg'] = $tongkg;
+		$result['thuong_san_luong'] = $tongthuongsanluong;
+		$result['tien_van_chuyen'] = $tienvanchuyen;
+		$result['doanhso'] = $doanhso;
+		return $result;
 	}
 
 	/** ----------------------------------------------------------------
@@ -419,26 +349,19 @@ class Giftcard extends CI_Model
 		$this->db->where('DATE(sale_time) BETWEEN ' .$this->db->escape($start_date). ' AND ' . $this->db->escape($end_date));
 		$this->db->where('type', 1);
 		$results = $this->db->get()->result_array();
-		//print_r($results); exit;
 		$i=0;
 		foreach($results as $result){
 			$arrkhuyenmais = array();
-			$tongsanluongtang = 0;
-			$tienvanchuyen =0;
-			$tongkg = 0;
-			$tongkg_ban = $tongkg_tang = 0;
-			$tonggiaban = 0;
-			$giatridonhang = 0;
-			$tongiavon = 0;
-			$tienlai = 0;
-			$laithucsu = 0;
-			$tienkhuyenmai = 0;
+			$tongsanluongtang = $tienvanchuyen = $tongkg = $tongkg_ban = $tongkg_tang = $tonggiaban = 0;
+			$giatridonhang = $tongiavon = $tienlai = $laithucsu = $tienkhuyenmai = 0;
+			$tongkgvanchuyen = 0;
+			$car_money = $result['car_money'];
 			$arrTotal['kl']['thuc_an_dam_dac'] = 0;
 			$arrTotal['kl']['thuc_an_hon_hop'] = 0;
 			$arrTotal['money']['thuc_an_dam_dac'] = 0;
 			$arrTotal['money']['thuc_an_hon_hop'] = 0;
 			// tinh tong kg
-			$this->db->select('item_id,category,quantity,quantity_give,unit_weigh,sale_price,input_prices');
+			$this->db->select('item_id,category,quantity,quantity_give,unit_weigh,sale_price,input_prices,quantity_loan,quantity_loan_return');
 			$this->db->from('sales_items');
 			$this->db->where('sale_id', $result['sale_id']);
 			if($category !== ''){
@@ -450,6 +373,7 @@ class Giftcard extends CI_Model
 				$giagoc = (int)$chitiet['input_prices'];
 				$giaban = (int)$chitiet['sale_price'];
 				$sokg = $chitiet['quantity']*$chitiet['unit_weigh'];
+				$tongkgvanchuyen = $tongkgvanchuyen + (($chitiet['quantity'] + $chitiet['quantity_give'] - $chitiet['quantity_loan'] + $chitiet['quantity_loan_return'])*$chitiet['unit_weigh']);
 				$tongkg = $tongkg + (($chitiet['quantity']+$chitiet['quantity_give'])*$chitiet['unit_weigh']);
 				$tongkg_ban = $tongkg_ban+($chitiet['quantity']*$chitiet['unit_weigh']);
 				$tongkg_tang = $tongkg_tang+($chitiet['quantity_give']*$chitiet['unit_weigh']);
@@ -480,8 +404,9 @@ class Giftcard extends CI_Model
 				$tienkhuyenmai = $tienkhuyenmai + $arrkhuyenmai['money'];
 			}
 			$tongsanluongtang = $result['sanluong_dongia'] * $result['sanluong_soluong'];
-			$tienvanchuyen = $result['car_money'] * $tongkg;
+			$tienvanchuyen = $result['car_money'] * $tongkgvanchuyen;
 			$laithucsu = ($tonggiaban + $tienvanchuyen ) - $tienkhuyenmai - $tongsanluongtang;
+			$arrReturn[$i]['tienvanchuyen'] = $tienvanchuyen;
 			if($tongkg > 0){
 				$arrReturn[$i]['ngay_mua'] =  date("d-m-Y", strtotime($result['sale_time']));
 				$arrReturn[$i]['code'] = $result['code'];
@@ -502,6 +427,92 @@ class Giftcard extends CI_Model
 			
 		}
 		return $arrReturn;	
+	}
+
+	public function BC04_doanhsokhachhang_tinhtong($data_rows,$customer_id, $people_manager, $category, $start_date, $end_date){
+		$check = '';
+		$CI = &get_instance();
+		$controller_name = $CI->uri->segment(1);
+		$returns = array();
+		$code = '';
+		$i = 0;
+		if ($category == '') {
+			$category = 'all';
+		}
+		if(!$people_manager >0){
+			$people_manager = -1;
+		}
+		foreach ($data_rows as $data_row) {
+			if ($data_row && isset($data_row['code'])) {
+				if ($code !== $data_row['code']) {
+					$customer_id = $data_row['person_id'];
+					$name = $data_row['full_name'];
+					$returns[$i]['code'] = $data_row['code'];
+					$returns[$i]['person_id'] = $data_row['person_id'];
+					$returns[$i]['full_name'] = $data_row['full_name'];
+					$returns[$i]['tong_kg'] = $data_row['tong_kg'];
+					$returns[$i]['tongkg_ban'] = $data_row['tongkg_ban'];
+					$returns[$i]['tongkg_tang'] = $data_row['tongkg_tang'];
+					$returns[$i]['thuong_san_luong'] = $data_row['thuong_san_luong'];
+					$returns[$i]['khuyen_mai'] = $data_row['khuyen_mai'];
+					$returns[$i]['tien_lai'] = $data_row['tien_lai'];
+					$returns[$i]['edit'] = anchor(
+						$controller_name . "/BC04_chitietdoanhsokhachhang/$customer_id/$category/$start_date/$end_date/$people_manager",
+						'<span class="glyphicon glyphicon-info-sign icon-th"></span>',
+						array('class' => 'modal-dlg', 'title' => "Xem chi tiết doanh số của $name")
+					);
+					$code = $data_row['code'];
+					$i++;
+				}
+				else {
+					$j = 0;
+					foreach ($returns as $return) {
+						if ($return['code'] == $data_row['code']) {
+							$returns[$j]['tong_kg'] = $returns[$j]['tong_kg'] + $data_row['tong_kg'];
+							$returns[$j]['tongkg_ban'] = $returns[$j]['tongkg_ban'] + $data_row['tongkg_ban'];
+							$returns[$j]['tongkg_tang'] = $returns[$j]['tongkg_tang'] + $data_row['tongkg_tang'];
+							$returns[$j]['thuong_san_luong'] += $data_row['thuong_san_luong'];
+							$returns[$j]['khuyen_mai'] = $returns[$j]['khuyen_mai'] + $data_row['khuyen_mai'];
+							$returns[$j]['tien_lai'] += $data_row['tien_lai'];
+						}
+						$j++;
+					}
+				}
+			}
+		}
+		$j = 0;
+		$tongkg = $tongkg_ban = $tongkg_tang = $tongthuongsanluong = $tongkhuyenmai = $tonglai = 0;
+		foreach ($returns as $return) {
+			// tru hang tra lai
+			$arrReturn = $this->Giftcard->get_hangtralai_by_khachhang($return['person_id'], $people_manager,$start_date, $end_date,$category);
+			if($arrReturn){
+				$returns[$j]['tong_kg'] = $returns[$j]['tong_kg'] - $arrReturn[0]['soluong_tralai'];
+				$returns[$j]['tongkg_ban'] = $returns[$j]['tongkg_ban'] - $arrReturn[0]['soluong_tralai'];
+				$returns[$j]['tien_lai'] = $returns[$j]['tien_lai'] - $arrReturn[0]['thanhtien'];
+			}
+			$tongkg += $returns[$j]['tong_kg'];
+			$tongkg_ban += $returns[$j]['tongkg_ban'];
+			$tongkg_tang += $returns[$j]['tongkg_tang'];
+			$tongthuongsanluong += $returns[$j]['thuong_san_luong'];
+			$tongkhuyenmai += $returns[$j]['khuyen_mai'];
+			$tonglai += $returns[$j]['tien_lai'];
+			$returns[$j]['tong_kg'] = to_currency_no_money($returns[$j]['tong_kg']) . " kg";
+			$returns[$j]['tongkg_ban'] = to_currency_no_money($returns[$j]['tongkg_ban']) . " kg";
+			$returns[$j]['tongkg_tang'] = to_currency_no_money($returns[$j]['tongkg_tang']) . " kg";
+			$returns[$j]['thuong_san_luong'] = to_currency($return['thuong_san_luong']);
+			$returns[$j]['khuyen_mai'] = to_currency($return['khuyen_mai']);
+			$returns[$j]['tien_lai'] = to_currency($returns[$j]['tien_lai']);
+			$j++;
+		}
+		$returns[$j]['code'] = '';
+		$returns[$j]['full_name'] = 'Tổng';
+		$returns[$j]['tong_kg'] = to_currency_no_money($tongkg) . " kg";
+		$returns[$j]['tongkg_ban'] = to_currency_no_money($tongkg_ban) . " kg";
+		$returns[$j]['tongkg_tang'] = to_currency_no_money($tongkg_tang) . " kg";
+		$returns[$j]['thuong_san_luong'] = to_currency($tongthuongsanluong);
+		$returns[$j]['khuyen_mai'] = to_currency($tongkhuyenmai);
+		$returns[$j]['tien_lai'] = to_currency($tonglai);
+		return $returns;
 	}
 
 	/** ----------------------------------------------------------------

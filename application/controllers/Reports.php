@@ -366,8 +366,33 @@ class Reports extends Secure_Controller
 	private function BC03_doanhsosanluong($customer_id, $people_manager, $start_date, $end_date)
 	{
 		// gia von hang hoa
-		$data_rows = $this->Giftcard->BC03_doanhsosanluong($customer_id, $people_manager, $start_date, $end_date);
-		echo json_encode(array('total' => 1, 'rows' => $data_rows));
+		$arrReturn= array();
+		$tienvanchuyen = 0;
+		$so_kg_dam_dac = $doanh_so_dam_dac = $so_kg_hon_hop = $doanh_so_hon_hop = $kg_thuong_san_luong = $tien_thuong_san_luong = $tien_van_chuyen =0;
+		$results = $this->Giftcard->BC03_doanhsosanluong($customer_id, $people_manager, $start_date, $end_date);
+		// Boc tach hon hop
+		$honhops = $this->Giftcard->BC04_doanhsokhachhang($customer_id,$people_manager,'thuc_an_hon_hop',$start_date, $end_date);
+		$honhops = $this->Giftcard->BC03_tinhtong($honhops,$customer_id, $people_manager,'thuc_an_hon_hop', $start_date, $end_date);
+		$so_kg_hon_hop = $honhops['tong_kg'];
+		$doanh_so_hon_hop = $honhops['doanhso'];
+		$tienvanchuyen = $tienvanchuyen + $honhops['tien_van_chuyen'];
+		// Boc tach dam dac
+		$damdacs = $this->Giftcard->BC04_doanhsokhachhang($customer_id,$people_manager,'thuc_an_dam_dac',$start_date, $end_date);
+		$damdacs = $this->Giftcard->BC03_tinhtong($damdacs,$customer_id, $people_manager,'thuc_an_dam_dac', $start_date, $end_date);
+		$so_kg_dam_dac = $damdacs['tong_kg'];
+		$doanh_so_dam_dac = $damdacs['doanhso'];
+		$tienvanchuyen = $tienvanchuyen + $damdacs['tien_van_chuyen'];
+		// Tinh ket qua
+		$arrReturn[0]['so_kg_dam_dac'] = to_currency($so_kg_dam_dac)." kg";
+		$arrReturn[0]['doanh_so_dam_dac'] = to_currency($doanh_so_dam_dac);
+		$arrReturn[0]['so_kg_hon_hop'] = to_currency($so_kg_hon_hop)." kg";
+		$arrReturn[0]['doanh_so_hon_hop'] = to_currency($doanh_so_hon_hop);
+		$arrReturn[0]['kg_thuong_san_luong'] = to_currency($results[0]['kg_thuong_san_luong'])." kg";
+		$arrReturn[0]['tien_thuong_san_luong'] = to_currency($results[0]['tien_thuong_san_luong']);
+		$arrReturn[0]['tien_van_chuyen'] = to_currency($tienvanchuyen);
+		$tongtatca = $doanh_so_dam_dac + $doanh_so_hon_hop - $results[0]['kg_thuong_san_luong'] + $tienvanchuyen;
+		$arrReturn[0]['tong'] = to_currency($tongtatca);
+		echo json_encode(array('total' => 1, 'rows' => $arrReturn));
 	}
 
 	/** ----------------------------------------------------------------
@@ -380,86 +405,7 @@ class Reports extends Secure_Controller
 		$controller_name = $CI->uri->segment(1);
 		// gia von hang hoa
 		$data_rows = $this->Giftcard->BC04_doanhsokhachhang($customer_id, $people_manager, $category, $start_date, $end_date);
-		$check = '';
-		$returns = array();
-		$code = '';
-		$i = 0;
-		if ($category == '') {
-			$category = 'all';
-		}
-		if(!$people_manager >0){
-			$people_manager = -1;
-		}
-		foreach ($data_rows as $data_row) {
-			if ($data_row) {
-				if ($code !== $data_row['code']) {
-					$customer_id = $data_row['person_id'];
-					$name = $data_row['full_name'];
-					$returns[$i]['code'] = $data_row['code'];
-					$returns[$i]['person_id'] = $data_row['person_id'];
-					$returns[$i]['full_name'] = $data_row['full_name'];
-					$returns[$i]['tong_kg'] = $data_row['tong_kg'];
-					$returns[$i]['tongkg_ban'] = $data_row['tongkg_ban'];
-					$returns[$i]['tongkg_tang'] = $data_row['tongkg_tang'];
-					$returns[$i]['thuong_san_luong'] = $data_row['thuong_san_luong'];
-					$returns[$i]['khuyen_mai'] = $data_row['khuyen_mai'];
-					$returns[$i]['tien_lai'] = $data_row['tien_lai'];
-					$returns[$i]['edit'] = anchor(
-						$controller_name . "/BC04_chitietdoanhsokhachhang/$customer_id/$category/$start_date/$end_date/$people_manager",
-						'<span class="glyphicon glyphicon-info-sign icon-th"></span>',
-						array('class' => 'modal-dlg', 'title' => "Xem chi tiết doanh số của $name")
-					);
-					$code = $data_row['code'];
-					$i++;
-				}
-				else {
-					$j = 0;
-					foreach ($returns as $return) {
-						if ($return['code'] == $data_row['code']) {
-							$returns[$j]['tong_kg'] = $returns[$j]['tong_kg'] + $data_row['tong_kg'];
-							$returns[$j]['tongkg_ban'] = $returns[$j]['tongkg_ban'] + $data_row['tongkg_ban'];
-							$returns[$j]['tongkg_tang'] = $returns[$j]['tongkg_tang'] + $data_row['tongkg_tang'];
-							$returns[$j]['thuong_san_luong'] += $data_row['thuong_san_luong'];
-							$returns[$j]['khuyen_mai'] = $returns[$j]['khuyen_mai'] + $data_row['khuyen_mai'];
-							$returns[$j]['tien_lai'] += $data_row['tien_lai'];
-						}
-						$j++;
-					}
-				}
-			}
-		}
-		$j = 0;
-		$tongkg = $tongkg_ban = $tongkg_tang = $tongthuongsanluong = $tongkhuyenmai = $tonglai = 0;
-		foreach ($returns as $return) {
-			// tru hang tra lai
-			$arrReturn = $this->Giftcard->get_hangtralai_by_khachhang($return['person_id'], $people_manager,$start_date, $end_date,$category);
-			if($arrReturn){
-				$returns[$j]['tong_kg'] = $returns[$j]['tong_kg'] - $arrReturn[0]['soluong_tralai'];
-				$returns[$j]['tongkg_ban'] = $returns[$j]['tongkg_ban'] - $arrReturn[0]['soluong_tralai'];
-				$returns[$j]['tien_lai'] = $returns[$j]['tien_lai'] - $arrReturn[0]['thanhtien'];
-			}
-			$tongkg += $returns[$j]['tong_kg'];
-			$tongkg_ban += $returns[$j]['tongkg_ban'];
-			$tongkg_tang += $returns[$j]['tongkg_tang'];
-			$tongthuongsanluong += $returns[$j]['thuong_san_luong'];
-			$tongkhuyenmai += $returns[$j]['khuyen_mai'];
-			$tonglai += $returns[$j]['tien_lai'];
-			$returns[$j]['tong_kg'] = to_currency_no_money($returns[$j]['tong_kg']) . " kg";
-			$returns[$j]['tongkg_ban'] = to_currency_no_money($returns[$j]['tongkg_ban']) . " kg";
-			$returns[$j]['tongkg_tang'] = to_currency_no_money($returns[$j]['tongkg_tang']) . " kg";
-			$returns[$j]['thuong_san_luong'] = to_currency($return['thuong_san_luong']);
-			$returns[$j]['khuyen_mai'] = to_currency($return['khuyen_mai']);
-			$returns[$j]['tien_lai'] = to_currency($returns[$j]['tien_lai']);
-			$j++;
-		}
-		$returns[$j]['code'] = '';
-		$returns[$j]['full_name'] = 'Tổng';
-		$returns[$j]['tong_kg'] = to_currency_no_money($tongkg) . " kg";
-		$returns[$j]['tongkg_ban'] = to_currency_no_money($tongkg_ban) . " kg";
-		$returns[$j]['tongkg_tang'] = to_currency_no_money($tongkg_tang) . " kg";
-		$returns[$j]['thuong_san_luong'] = to_currency($tongthuongsanluong);
-		$returns[$j]['khuyen_mai'] = to_currency($tongkhuyenmai);
-		$returns[$j]['tien_lai'] = to_currency($tonglai);
+		$returns = $this->Giftcard->BC04_doanhsokhachhang_tinhtong($data_rows, $customer_id, $people_manager, $category, $start_date, $end_date);
 		//$data_rows[] = $this->xss_clean(doanhsokhachhang_data_last_row($data_rows));
 		echo json_encode(array('total' => count($data_rows), 'rows' => $returns));
 	}
