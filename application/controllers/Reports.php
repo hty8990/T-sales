@@ -376,12 +376,14 @@ class Reports extends Secure_Controller
 		$so_kg_hon_hop = $honhops['tong_kg'];
 		$doanh_so_hon_hop = $honhops['doanhso'];
 		$tienvanchuyen = $tienvanchuyen + $honhops['tien_van_chuyen'];
+		$doanh_so_hon_hop = $doanh_so_hon_hop - $honhops['tien_van_chuyen'];
 		// Boc tach dam dac
 		$damdacs = $this->Giftcard->BC04_doanhsokhachhang($customer_id,$people_manager,'thuc_an_dam_dac',$start_date, $end_date);
 		$damdacs = $this->Giftcard->BC03_tinhtong($damdacs,$customer_id, $people_manager,'thuc_an_dam_dac', $start_date, $end_date);
 		$so_kg_dam_dac = $damdacs['tong_kg'];
 		$doanh_so_dam_dac = $damdacs['doanhso'];
 		$tienvanchuyen = $tienvanchuyen + $damdacs['tien_van_chuyen'];
+		$doanh_so_dam_dac = $doanh_so_dam_dac - $damdacs['tien_van_chuyen'];
 		// Tinh ket qua
 		$arrReturn[0]['so_kg_dam_dac'] = to_currency($so_kg_dam_dac)." kg";
 		$arrReturn[0]['doanh_so_dam_dac'] = to_currency($doanh_so_dam_dac);
